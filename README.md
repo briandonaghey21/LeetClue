@@ -1,2 +1,2 @@
 # LeetHint
-A chrome extension for generating LeetCode hints
+A popup ui chrome extension for generating LeetCode hints
