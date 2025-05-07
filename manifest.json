@@ -12,7 +12,7 @@
     "permissions": ["activeTab", "tabs", "scripting"],
     "content_scripts": [
       {
-        "matches": ["*://leetcode.com/problems/*"],
+        "matches": ["*://leetcode.com/*"],
         "js": ["content.js"]
       }
     ],
