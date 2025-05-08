@@ -3,7 +3,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const output = document.getElementById("hintResult");
 
     // session cache for hints
-    const hintCache = [];
+    let description;
+    let title;
+    let hintCache = [];
+    document.getElementById("getHint").addEventListener("click", () => {
+        if (title && description) {
+            requestNewHint(title, description);
+        } else {
+            output.textContent = "Waiting for Hint data...";
+        }
+  
     async function requestNewHint(title, description) {
         try {
             const response = await fetch("http://localhost:3000/api/generate-hint", {
@@ -24,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             output.textContent = "Failed to get a hint.";
         }
     }
-
+    });
   // get curent window
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const tab = tabs[0];
@@ -45,8 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // get the problem title
-        let description;
-        let title;
+      
         chrome.tabs.sendMessage(tabId, { type: "GET_PROBLEM_TITLE" }, (response) => {
           if (chrome.runtime.lastError) {
             output.textContent = "Content script didn't respond.";
