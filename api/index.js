@@ -10,20 +10,33 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 app.use(express.json());
 
 app.post("/api/generate-hint", async (req, res) => {
+  const { title, description, cache = [] } = req.body;
+
   if (!title || !description) {
     return res.status(400).json({ error: "Missing title or description." });
   }
-  // todo make open ai api call and make env variable
+
+  const prompt = `Give a small one-sentence direct hint for the following LeetCode problem that is different from the following list:
+    Previous hints: ${cache.join(".")}
+    Problem Title: ${title}
+    Problem Description: ${description}
+    Hint:`;
 
   try {
-   
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4.1-nano-2025-04-14",
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 150
+    });
+
+    const hint = completion.choices[0].message.content.trim();
+    res.json({ hint });
   } catch (err) {
-    console.error(err);
+    console.error("OpenAI Error:", err);
     res.status(500).json({ error: "Failed to generate hint." });
   }
 });
 
 app.listen(port, () => {
-  console.log( ` API running at http://localhost:${port}`);
+  console.log(`API running at http://localhost:${port}`);
 });
-
