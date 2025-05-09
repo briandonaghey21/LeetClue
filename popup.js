@@ -7,10 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("getHint").addEventListener("click", () => {
       if (title && description) {
         requestNewHint(title, description);
-      } else {
-        const msg = document.createElement("p");
-        msg.textContent = "Waiting for Hint data...";
-        hintContainer.appendChild(msg);
       } 
       async function requestNewHint(title, description) {
         try {
@@ -37,9 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     });
-  
-    
-  
+
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const tab = tabs[0];
       const tabId = tab.id;
@@ -66,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const titleEl = document.createElement("p");
             titleEl.textContent = `Problem: ${title}`;
             hintContainer.appendChild(titleEl);
-            if (description) requestNewHint(title, description);
           }
         });
   
@@ -77,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
           }
           if (response?.description) {
             description = response.description;
-            if (title) requestNewHint(title, description);
           }
         });
       });
