@@ -33,7 +33,8 @@ app.post("/api/generate-hint", async (req, res) => {
     const completion = await openai.chat.completions.create({
       model: "gpt-4.1-nano-2025-04-14",
       messages: [{ role: "user", content: prompt }],
-      max_tokens: 150
+      max_tokens: 200,
+      temperature: 0.9
     });
 
     const hint = completion.choices[0].message.content.trim();

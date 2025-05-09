@@ -1,4 +1,3 @@
-
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === "GET_PROBLEM_TITLE") {
     const ele = document.querySelector(
