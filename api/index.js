@@ -23,7 +23,7 @@ app.post("/api/generate-hint", async (req, res) => {
     return res.status(400).json({ error: "Missing title or description." });
   }
 
-  const prompt = `Give a small one-sentence direct hint for the following LeetCode problem that is different from the following list:
+  const prompt = `Give a small one-sentence direct hint for the following LeetCode problem that is an extension of the hints from the following list:
     Previous hints: ${cache.join(".")}
     Problem Title: ${title}
     Problem Description: ${description}
