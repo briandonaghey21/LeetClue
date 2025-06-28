@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetClue Side Panel</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 16px;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ffa116 0%, #ff6b35 100%);
+            color: white;
+            padding: 16px;
+            margin: -16px -16px 16px -16px;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 8px rgba(255, 161, 22, 0.3);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .problem-info {
+            background: #262626;
+            border: 1px solid #3a3a3a;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .problem-title {
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+        }
+        
+        #getHint {
+            background: linear-gradient(135deg, #ffa116 0%, #ff6b35 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+        
+        #getHint:hover {
+            background: linear-gradient(135deg, #00b4a6 0%, #00c4b6 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 175, 155, 0.3);
+        }
+        
+        #getHint:disabled {
+            background: #4a4a4a;
+            color: #888;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .hint-card {
+            background: #262626;
+            border: 1px solid #3a3a3a;
+            border-left: 4px solid #ffa116;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        
+        .hint-card:hover {
+            background: #2a2a2a;
+            border-left-color: #ffb84d;
+            transform: translateX(4px);
+        }
+        
+        .hint-number {
+            font-size: 12px;
+            color: #ffa116;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .error {
+            background: #3a1f1f;
+            color: #ff6b6b;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid #ff4757;
+            margin-bottom: 12px;
+            border: 1px solid #4a2020;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #999;
+            font-style: italic;
+            padding: 20px;
+        }
+        
+        .no-problem {
+            text-align: center;
+            color: #999;
+            padding: 40px 20px;
+            background: #262626;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+        }
+        
+        .clear-hints {
+            background: transparent;
+            color: #999;
+            border: 1px solid #4a4a4a;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 8px;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+        
+        .clear-hints:hover {
+            background: #3a3a3a;
+            color: #ffffff;
+            border-color: #5a5a5a;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔍 LeetClue</h1>
+    </div>
+    
+    <div id="problemInfo" class="problem-info" style="display: none;">
+        <div id="problemTitle" class="problem-title"></div>
+    </div>
+    
+    <div class="controls">
+        <button id="getHint" disabled>Get Hint</button>
+        <button id="clearHints" class="clear-hints" style="display: none;">Clear All Hints</button>
+    </div>
+    
+    <div id="hintContainer"></div>
+    
+    <script src="sidepanel.js"></script>
+</body>
+</html>
